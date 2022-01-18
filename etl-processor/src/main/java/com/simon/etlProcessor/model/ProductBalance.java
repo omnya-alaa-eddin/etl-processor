@@ -18,6 +18,16 @@ public class ProductBalance {
 
     private Double deltaChange;
 
+    private Integer order;
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     public String getSnapshotDate() {
         return snapshotDate;
     }

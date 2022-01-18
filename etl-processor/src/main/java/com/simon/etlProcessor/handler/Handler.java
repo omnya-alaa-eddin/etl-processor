@@ -32,7 +32,7 @@ public class Handler implements RequestHandler<SQSEvent, String> {
             for (SQSMessage msg : event.getRecords()) {
 
                 // get s3 input info then get metadata then get date
-                String s3Key = sqsService.getS3Key(msg);
+                String s3Key = sqsService.getS3Key(msg.getBody());
                 logger.log("New file has been uploaded with s3 key : " + s3Key);
                 logger.log("will check if previuos month exists");
                 // search during s3 files by previous month
@@ -53,7 +53,7 @@ public class Handler implements RequestHandler<SQSEvent, String> {
                 else {
                     logger.log("Previuos month doesn't exist and will reminate");
                     response = "Previuos month doesn't exist and will terminate";
-                    return null;
+                    return response;
                 }
             }
         } catch (Exception ex) {

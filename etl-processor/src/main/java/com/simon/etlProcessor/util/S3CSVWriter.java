@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.opencsv.CSVWriter;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -25,9 +26,12 @@ public class S3CSVWriter {
     public String writeRecords(List<FlowOfFund> fofLst, String tenant) throws IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         OutputStreamWriter streamWriter = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
+        HeaderColumnNameMappingStrategy<FlowOfFund> beanStrategy = new HeaderColumnNameMappingStrategy<FlowOfFund>();
 
+        beanStrategy.setType(FlowOfFund.class);
         try (CSVWriter writer = buildCSVWriter(streamWriter)) {
             StatefulBeanToCsv<FlowOfFund> beanToCsv = new StatefulBeanToCsvBuilder(writer)
+                    .withMappingStrategy(beanStrategy)
                     .withQuotechar(com.opencsv.CSVWriter.NO_QUOTE_CHARACTER).build();
 
             beanToCsv.write(fofLst);

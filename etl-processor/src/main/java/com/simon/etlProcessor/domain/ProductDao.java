@@ -13,7 +13,7 @@ public class ProductDao {
 
     static Connection con = DatabaseConnection.getConnection();
 
-    final String GET_PRODUCT_QUERY = "select * from PRODUCT_LIQUIDITY where tenant_id=?";
+    final static String GET_PRODUCT_QUERY = "select * from PRODUCT_LIQUIDITY where tenant_id=?";
 
     public Map<String, ProductLiquidity> getProductsLiquidity(String tenant) {
 
@@ -47,7 +47,6 @@ public class ProductDao {
         }
         return null;
     }
-
     // Simple log utility
     private static void log(String string) {
         System.out.println(string);

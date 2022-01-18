@@ -2,19 +2,14 @@ package com.simon.etlProcessor.model;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvIgnore;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class FlowOfFund {
-
-    public FlowOfFund(String memberId, String p_id, String flowFrom, String flowTo, String flowAmount,
+    public FlowOfFund(String memberId, String flowFrom, String flowTo, String flowAmount,
             String snapshotDate) {
         super();
         this.memberId = memberId;
-        this.p_id = p_id;
         this.flowFrom = flowFrom;
         this.flowTo = flowTo;
         this.flowAmount = flowAmount;
@@ -27,15 +22,12 @@ public class FlowOfFund {
 
     @CsvBindByName(column = "")
     @CsvBindByPosition(position = 0)
+    @CsvIgnore
     private String id;
 
     @CsvBindByName(column = "Member_ID")
     @CsvBindByPosition(position = 1)
     private String memberId;
-
-    @CsvBindByName(column = "P_ID")
-    @CsvBindByPosition(position = 2)
-    private String p_id;
 
     @CsvBindByPosition(position = 3)
     @CsvBindByName(column = "Flow_From")
@@ -68,15 +60,6 @@ public class FlowOfFund {
     public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
-
-    public String getP_id() {
-        return p_id;
-    }
-
-    public void setP_id(String p_id) {
-        this.p_id = p_id;
-    }
-
     public String getFlowFrom() {
         return flowFrom;
     }
